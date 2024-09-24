@@ -1,10 +1,9 @@
 package main
 
 import (
-	"log"
-
+	"rbrpsrv/config"
 )
 
 func main() {
-	log.Println("Basic function")
+	config.ReadConfig()
 }
