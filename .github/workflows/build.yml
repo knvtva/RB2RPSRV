@@ -29,7 +29,7 @@ jobs:
       - name: Initialize Go module (if necessary)
         run: |
           if [ ! -f go.mod ]; then
-            go mod init github.com/knvtva/RBRPSRV
+            go mod init github.com/knvtva/RB2RPSRV
             go mod tidy
           fi
 
