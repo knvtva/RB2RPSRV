@@ -1,0 +1,22 @@
+Wii - 
+
+Access Key: dqN3rVe
+Auth Port: 30845
+Secure Port: 30846
+Address: rb2wiilive.hmxservices.com
+
+PS3 -
+
+Access Key: Ey6Ma18
+Auth Port: 30825
+Secure Port: 30826
+User Password: PS3NPDummyPwd
+Address: rb2ps3live.hmxservices.com
+
+Xbox - 
+
+Access Key: Fi73vp
+Auth Port: 30835
+Secure Port: 30836
+User Password: LSP Password :: Not confirmed
+Address: hmxlive360 :: Will need a mod to bypass the secureGateway and set the server's address

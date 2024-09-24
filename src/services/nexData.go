@@ -12,5 +12,5 @@ func SetupAuth() {
 	Auth.SetPrudpVersion(0)
 	Auth.SetSignatureVersion(1)
     	Auth.SetKerberosKeySize(16)
-    	Auth.SetAccessKey("FindWiiAccessKey")
+    	Auth.SetAccessKey("dqN3rVe")
 }
