@@ -1,8 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "obyvXbUHM6dE2enEuMAdkCdNkRHOrl+u9x7vBljcQL70FrNyCv7eBJgdmkVA0GRXTNtSqKCOCpXHoCY94NuH4g==",
+  "dgSpecHash": "2L7LqxaPaEnzdLHVoDIFVoMBpPANop30RZ/6SqiRwKSIzd0w/rzTpJtdBdYJR+kwGCq9uc+5nlX8LTDCaEMMPg==",
   "success": true,
-  "projectFilePath": "F:\\GitHub Projects\\RB2RPSRV\\src\\Quazal\\Quazal\\Quazal\\Quazal.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "F:\\GitHub Projects\\RB2RPSRV\\src\\Quazal\\Quazal.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ashhh\\.nuget\\packages\\dotnetzip\\1.16.0\\dotnetzip.1.16.0.nupkg.sha512",
+    "C:\\Users\\ashhh\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.1\\microsoft.netcore.platforms.3.1.1.nupkg.sha512",
+    "C:\\Users\\ashhh\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\ashhh\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
+    "C:\\Users\\ashhh\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\ashhh\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
+    "C:\\Users\\ashhh\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
+    "C:\\Users\\ashhh\\.nuget\\packages\\system.text.encoding.codepages\\4.7.1\\system.text.encoding.codepages.4.7.1.nupkg.sha512",
+    "C:\\Users\\ashhh\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
+  ],
   "logs": []
 }

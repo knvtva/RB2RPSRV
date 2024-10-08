@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\GitHub Projects\\RB2RPSRV\\src\\Quazal\\Quazal\\Quazal\\Quazal.csproj": {}
+    "F:\\GitHub Projects\\RB2RPSRV\\src\\Quazal\\Quazal.csproj": {}
   },
   "projects": {
-    "F:\\GitHub Projects\\RB2RPSRV\\src\\Quazal\\Quazal\\Quazal\\Quazal.csproj": {
+    "F:\\GitHub Projects\\RB2RPSRV\\src\\Quazal\\Quazal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\GitHub Projects\\RB2RPSRV\\src\\Quazal\\Quazal\\Quazal\\Quazal.csproj",
+        "projectUniqueName": "F:\\GitHub Projects\\RB2RPSRV\\src\\Quazal\\Quazal.csproj",
         "projectName": "Quazal",
-        "projectPath": "F:\\GitHub Projects\\RB2RPSRV\\src\\Quazal\\Quazal\\Quazal\\Quazal.csproj",
+        "projectPath": "F:\\GitHub Projects\\RB2RPSRV\\src\\Quazal\\Quazal.csproj",
         "packagesPath": "C:\\Users\\ashhh\\.nuget\\packages\\",
-        "outputPath": "F:\\GitHub Projects\\RB2RPSRV\\src\\Quazal\\Quazal\\Quazal\\obj\\",
+        "outputPath": "F:\\GitHub Projects\\RB2RPSRV\\src\\Quazal\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ashhh\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "DotNetZip": {
+              "target": "Package",
+              "version": "[1.16.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
