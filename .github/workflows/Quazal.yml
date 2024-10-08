@@ -1,12 +1,16 @@
-name: Build C# Project
+name: Build Quazal
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'src/Quazal/**'
   pull_request:
     branches:
       - main
+    paths:
+      - 'src/Quazal/**'
 
 jobs:
   build:
@@ -19,7 +23,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0' # Specify the version of .NET you are using
+        dotnet-version: '8.0'
 
     - name: Restore dependencies
       run: dotnet restore src/Quazal/Quazal.csproj
