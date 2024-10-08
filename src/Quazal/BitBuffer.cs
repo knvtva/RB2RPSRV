@@ -22,5 +22,14 @@ namespace Quazal
             bitPos = 0;
             buffer.WriteByte(0);
         }
+
+        public byte[] createArray()
+        {
+            MemoryStream m = new MemoryStream();
+            // Implement WriteUint8
+            byte[] data = buffer.ToArray();
+            m.Write(data, 0, data.Length);
+            return m.ToArray();
+        }
     }
 }
