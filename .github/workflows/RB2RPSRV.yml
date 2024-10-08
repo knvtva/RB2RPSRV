@@ -1,0 +1,32 @@
+name: Build RB2RPSRV
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/RB2RPSRV/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'src/RB2RPSRV/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0'
+
+    - name: Restore dependencies
+      run: dotnet restore src/RB2RPSRV/RB2RPSRV.csproj
+
+    - name: Build project
+      run: dotnet build src/RB2RPSRV/RB2RPSRV.csproj --configuration Release --no-restore
