@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
+using Quazal;
 
 namespace RB2RPSRV
 {
@@ -58,7 +59,26 @@ namespace RB2RPSRV
 
         public static void ProcessPacket(byte[] data, IPEndPoint ep)
         {
-            Console.WriteLine("[RB2RPSRV] <> Not Implemented...");
+            QPacket p = new QPacket(data);
+
+            switch(p.type)
+            {
+                case QPacket.PACKETTYPE.SYN:
+                    // Implement SYN
+                    break;
+                case QPacket.PACKETTYPE.CONNECT:
+                    // Implement CONNECT
+                    break;
+                case QPacket.PACKETTYPE.DATA:
+                    // Implement DATA
+                    break;
+                case QPacket.PACKETTYPE.DISCONNECT:
+                    // Implement DISCONNECT
+                    break;
+                case QPacket.PACKETTYPE.PING:
+                    // Implement PING
+                    break;
+            }
         }
     }
 }
