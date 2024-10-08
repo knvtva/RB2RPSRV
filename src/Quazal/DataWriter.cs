@@ -132,6 +132,101 @@ namespace Quazal
             s.WriteByte((byte)(v >> 56));
         }
 
+        public static byte[] Decompress(byte[] data)
+        {
+            ZlibStream s = new ZlibStream(new MemoryStream(data), Ionic.Zlib.CompressionMode.Decompress);
+            MemoryStream result = new MemoryStream();
+            s.CopyTo(result);
+            return result.ToArray();
+        }
+
+        public static byte[] Compress(byte[] data)
+        {
+            ZlibStream s = new ZlibStream(new MemoryStream(data), Ionic.Zlib.CompressionMode.Compress);
+            MemoryStream result = new MemoryStream();
+            s.CopyTo(result);
+            return result.ToArray();
+        }
+
+        public static byte[] Encrypt(string key, byte[] data)
+        {
+            return Encrypt(Encoding.ASCII.GetBytes(key), data);
+        }
+
+        public static byte[] Decrypt(string key, byte[] data)
+        {
+            return Encrypt(Encoding.ASCII.GetBytes(key), data);
+        }
+
+        public static byte[] Encrypt(byte[] key, byte[] data)
+        {
+            return EncryptOutput(key, data).ToArray();
+        }
+
+        public static byte[] Decrypt(byte[] key, byte[] data)
+        {
+            return EncryptOutput(key, data).ToArray();
+        }
+
+        private static byte[] EncryptInitalize(byte[] key)
+        {
+            byte[] s = Enumerable.Range(0, 256)
+              .Select(i => (byte)i)
+              .ToArray();
+            for (int i = 0, j = 0; i < 256; i++)
+            {
+                j = (j + key[i % key.Length] + s[i]) & 255;
+
+                Swap(s, i, j);
+            }
+            return s;
+        }
+
+        private static IEnumerable<byte> EncryptOutput(byte[] key, IEnumerable<byte> data)
+        {
+            byte[] s = EncryptInitalize(key);
+            int i = 0;
+            int j = 0;
+            return data.Select((b) =>
+            {
+                i = (i + 1) & 255;
+                j = (j + s[i]) & 255;
+                Swap(s, i, j);
+                return (byte)(b ^ s[(s[i] + s[j]) & 255]);
+            });
+        }
+
+        private static void Swap(byte[] s, int i, int j)
+        {
+            byte c = s[i];
+            s[i] = s[j];
+            s[j] = c;
+        }
+
+        public static byte[] DeriveKey(uint pid, string input = "UbiDummyPwd")
+        {
+            uint count = 65000 + (pid % 1024);
+            MD5 md5 = MD5.Create();
+            byte[] buff = Encoding.ASCII.GetBytes(input);
+            for (uint i = 0; i < count; i++)
+                buff = md5.ComputeHash(buff);
+            return buff;
+        }
+
+        public static byte[] MakeHMAC(byte[] key, byte[] data)
+        {
+            HMACMD5 hmac = new HMACMD5(key);
+            return hmac.ComputeHash(data);
+        }
+
+        public static byte[] MakeFilledArray(int len)
+        {
+            byte[] result = new byte[len];
+            for (int i = 0; i < len; i++)
+                result[i] = (byte)i;
+            return result;
+        }
+
     }
     
 }
