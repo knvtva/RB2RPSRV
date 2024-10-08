@@ -22,7 +22,7 @@ jobs:
         dotnet-version: '8.0' # Specify the version of .NET you are using
 
     - name: Restore dependencies
-      run: dotnet restore src/quazal/Quazal.csproj
+      run: dotnet restore src/Quazal/Quazal.csproj
 
     - name: Build project
-      run: dotnet build src/quazal/Quazal.csproj --configuration Release --no-restore
+      run: dotnet build src/Quazal/Quazal.csproj --configuration Release --no-restore
