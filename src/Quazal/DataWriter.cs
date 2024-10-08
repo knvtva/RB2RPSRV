@@ -75,7 +75,7 @@ namespace Quazal
         public static string ReadString(Stream s)
         {
             string result = "";
-            ushort len = ReadU16(s);
+            ushort len = ReadUint16(s);
             for (int i = 0; i < len - 1; i++)
                 result += (char)s.ReadByte();
             s.ReadByte();
