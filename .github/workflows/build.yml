@@ -1,4 +1,4 @@
-name: Build Quazal
+name: Build C# Project
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
         dotnet-version: '8.0' # Specify the version of .NET you are using
 
     - name: Restore dependencies
-      run: dotnet restore src/quazal
+      run: dotnet restore src/quazal/Quazal.csproj
 
     - name: Build project
-      run: dotnet build src/quazal --configuration Release --no-restore
+      run: dotnet build src/quazal/Quazal.csproj --configuration Release --no-restore
