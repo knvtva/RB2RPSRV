@@ -82,6 +82,56 @@ namespace Quazal
             return result;
         }
 
+        public static void WriteUint8(Stream s, byte v)
+        {
+            s.WriteByte(v);
+        }
+
+        public static void WriteBool(Stream s, bool v)
+        {
+            s.WriteByte((byte)(v ? 1 : 0));
+        }
+
+        public static void WriteUint16(Stream s, ushort v)
+        {
+            s.WriteByte((byte)v);
+            s.WriteByte((byte)(v >> 8));
+        }
+
+        public static void WriteUint32(Stream s, uint v)
+        {
+            s.WriteByte((byte)v);
+            s.WriteByte((byte)(v >> 8));
+            s.WriteByte((byte)(v >> 16));
+            s.WriteByte((byte)(v >> 24));
+        }
+
+        public static void WriteUint16LE(Stream s, ushort v)
+        {
+            s.WriteByte((byte)(v >> 8));
+            s.WriteByte((byte)v);
+        }
+
+        public static void WriteUint32LE(Stream s, uint v)
+        {
+            s.WriteByte((byte)(v >> 24));
+            s.WriteByte((byte)(v >> 16));
+            s.WriteByte((byte)(v >> 8));
+            s.WriteByte((byte)v);
+        }
+
+        public static void WriteUint64(Stream s, ulong v)
+        {
+            s.WriteByte((byte)v);
+            s.WriteByte((byte)(v >> 8));
+            s.WriteByte((byte)(v >> 16));
+            s.WriteByte((byte)(v >> 24));
+            s.WriteByte((byte)(v >> 32));
+            s.WriteByte((byte)(v >> 40));
+            s.WriteByte((byte)(v >> 48));
+            s.WriteByte((byte)(v >> 56));
+        }
+
     }
     
 }
