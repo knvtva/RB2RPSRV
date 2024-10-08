@@ -7,7 +7,8 @@ namespace RB2RPSRV
         [STAThread]
         static void Main()
         {
-            Server.Start();
+            AuthServer.Start();
+            SecureServer.Start();
         }
     }
 }
