@@ -23,7 +23,6 @@ namespace Quazal
             foreach (Client c in clients)
                 if (c.ep.Address.ToString() == ep.Address.ToString() && c.ep.Port == ep.Port)
                     return c;
-            Console.WriteLine(1, "Error : Cant find client for end point : " + ep.ToString());
             return null;
         }
 
@@ -32,7 +31,6 @@ namespace Quazal
             foreach (Client c in clients)
                 if (c.IDsend == id)
                     return c;
-            Console.WriteLine(1, "Error : Cant find client for id : 0x" + id.ToString("X8"));
             return null;
         }
 
@@ -41,7 +39,6 @@ namespace Quazal
             foreach (Client c in clients)
                 if (c.IDrecv == id)
                     return c;
-            Console.WriteLine(1, "Error : Cant find client for id : 0x" + id.ToString("X8"));
             return null;
         }  
     }
