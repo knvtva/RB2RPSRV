@@ -1,4 +1,4 @@
-name: Build RBRPSRV
+name: Build Quazal
 
 on:
   push:
@@ -12,29 +12,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        goos: [linux, windows, darwin]
-        goarch: [amd64]
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: "1.20"
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0' # Specify the version of .NET you are using
 
-      - name: Build for ${{ matrix.goos }}-${{ matrix.goarch }}
-        run: |
-          mkdir -p dist
-          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o dist/app-${{ matrix.goos }}-${{ matrix.goarch }} ./src
-        env:
-          CGO_ENABLED: 0
+    - name: Restore dependencies
+      run: dotnet restore src/quazal
 
-      - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: build-${{ matrix.goos }}-${{ matrix.goarch }}
-          path: dist/app-${{ matrix.goos }}-${{ matrix.goarch }}
+    - name: Build project
+      run: dotnet build src/quazal --configuration Release --no-restore
