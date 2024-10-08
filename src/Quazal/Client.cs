@@ -16,8 +16,11 @@ namespace Quazal
         public byte sessionID;
         public byte[] sessionKey;
         public ushort sequenceCounter; // How many packets have go in and out
-
-        public string StationURL; // External + Also used for NAT Probing        
-
+        public string StationURL; // External + Also used for NAT Probing
+        public uint IDrecv;
+        public uint IDsend;
+        public IPEndPoint ep;
+        public UdpClient udp;      
     }
+
 }
