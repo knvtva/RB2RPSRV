@@ -9,7 +9,7 @@ namespace Quazal
 
           public static QPacket ProcessSYN(QPacket p, IPEndPoint ep, out Client client)
           {
-            client = client.GetClientByEndPoint(ep);
+            client = Server.GetClientByEndPoint(ep);
             if (client == null)
             {
               client = new Client();
