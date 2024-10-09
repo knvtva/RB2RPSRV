@@ -60,6 +60,8 @@ namespace Quazal
             {
                 case RMCP.PROTOCOL.AuthenticationService:
                     break;
+                default:
+                    Logger.Warning("RMCP not implemented " + rmc.proto);
             }
         }
 
