@@ -50,10 +50,10 @@ namespace Quazal
             return reply; 
           }
 
-          public static byte[] makeConnectPayload(Client client, QPacket p)
+          public static byte[] MakeConnectPayload(Client client, QPacket p)
           {
             MemoryStream m = new MemoryStream(p.payload);
-            uint size = DataWriter.ReadUInt32(m);
+            uint size = DataWriter.ReadUint32(m);
             byte[] buff = new byte[size];
             m.Read(buff, 0, (int)size);
             buff = new byte[size];
