@@ -6,6 +6,32 @@ namespace Quazal
 {
     public static class QPacketHandler
     {
+
+          public static void QPacket ProcessSYN(QPacket p, IPEndPoint ep, out Client client)
+          {
+            client = client.GetClientByEndPoint(ep);
+            if (client == null)
+            {
+              client = new Client();
+              client.ep = ep;
+              client.IDrecv = Server.idCounter++;
+              client.PID = Server.pidCounter++ // Change this to get the client username and PID from the database
+              Server.clients.Add(client);
+            }
+            QPacket reply = new QPacket();
+            reply.m_oSourceVPort = p.m_oDestinationVPort;
+            reply.m_oDestinationVPort = p.m_oSourceVPort;
+            reply.flags = new List<QPacket.PACKETFLAG>() { QPacket.PACKETFLAG.FLAG_ACK };
+            reply.type = QPacket.PACKETTYPE.SYN;
+            reply.m_bySessionID = p.m_bySessionID;
+            reply.m_uiSignature = p.m_uiSignature;
+            reply.uiSeqId = p.uiSeqId;
+            reply.m_uiConnectionSignature = p.m_uiConnectionSignature;
+            reply.payload = new byte[0];
+            return reply;
+          }
+
+
           public static void ProcessPacket(string source, byte[] data, IPEndPoint ep, UdpClient listener, uint serverPID, ushort listenPort, bool removeConnectPayload = false)
           {
             QPacket p = new QPacket(data);
