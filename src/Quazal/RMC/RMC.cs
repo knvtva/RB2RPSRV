@@ -75,7 +75,7 @@ namespace Quazal
             switch (rmc.proto)
             {
                 case RMCP.PROTOCOL.AuthenticationService:
-                    // Implement This method
+                    AuthenticationService.ProcessAuthenticationServiceRequest(m, rmc);
                     break;
             }
         }
