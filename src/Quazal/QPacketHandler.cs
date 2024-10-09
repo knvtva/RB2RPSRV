@@ -118,6 +118,7 @@ namespace Quazal
               {
                 client = Server.GetClientByIDrecv(p.m_uiSignature);
               }
+
               switch (p.type)
               {
                 case QPacket.PACKETTYPE.SYN:
@@ -144,6 +145,30 @@ namespace Quazal
                     if (client != null)
                         reply = QPacketHandler.ProcessPING(client, p);
                         break;
+                case QPacket.PACKETTYPE.NATPING:
+                  ulong time = BitConverter.ToUInt64(p.payload, 5);
+                  if (timeToIgnore.Contains(time))
+                      timeToIgnore.Remove(time);
+                  else
+                  {
+                    reply = p;
+                    m = new MemoryStream();
+                    byte b = (byte)(reply.payload[0] == 1 ? 0 : 1);
+                    m.WriteByte(b);
+                    DataWriter.WriteUint64(m, 0x1234); // RVCID , I think?
+                    DataWriter.WriteUint64(m, time);
+                    reply.payload = m.ToArray();
+                    Send(source, reply, ep, listener);
+                    m = new MemoryStream();
+                    b = (byte)(b == 1 ? 0 : 1);
+                    m.WriteByte(b);
+                    DataWriter.WriteUint64(m, 0x1234); // RVCID Again, I think?
+                    time = DataWriter.MakeTimestamp();
+                    timeToIgnore.Add(time);
+                    DataWriter.WriteUint64(m, DataWriter.MakeTimestamp());
+                    reply.payload = m.ToArray();
+                  }
+                  break;
               }
 
               if (reply != null)
