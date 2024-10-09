@@ -23,3 +23,6 @@ go.work.sum
 
 # env file
 .env
+/src/Quazal/obj
+/src/Quazal/bin
+/src/Quazal/obj
