@@ -98,6 +98,8 @@ namespace Quazal
             return reply;
           }
 
+          public static List<ulong> timeToIgnore = new List<ulong>();
+
           public static void ProcessPacket(string source, byte[] data, IPEndPoint ep, UdpClient listener, uint serverPID, ushort listenPort, bool removeConnectPayload = false)
           {
             QPacket p = new QPacket(data);
@@ -141,6 +143,29 @@ namespace Quazal
                       reply = QPacketHandler.ProcessPING(client, p);
                       break;
             }
+
+            if (reply! = null)
+              Send(source, reply, ep, listener);
+            
+            if (p.realSize != data.Length)
+            {
+              m = new MemoryStream(data);
+              int left = (int)(data.Length - p.realSize);
+              byte[] newData = new byte[left];
+              m.Seek(p.realSize, 0);
+              m.Read(newData, 0, left);
+              data = newData;
+            }
+            else
+            {
+              break;
+            }
+          }
+
+          public static void Send(string source, QPacket p, IPEndPoint ep, UdpClient listener)
+          {
+            byte[] data = p.toBuffer();
+            listener.Send(data, data.Length, ep);
           }
     }
 }
