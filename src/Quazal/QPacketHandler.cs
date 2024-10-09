@@ -7,7 +7,7 @@ namespace Quazal
     public static class QPacketHandler
     {
 
-          public static void QPacket ProcessSYN(QPacket p, IPEndPoint ep, out Client client)
+          public static QPacket ProcessSYN(QPacket p, IPEndPoint ep, out Client client)
           {
             client = client.GetClientByEndPoint(ep);
             if (client == null)
@@ -15,7 +15,7 @@ namespace Quazal
               client = new Client();
               client.ep = ep;
               client.IDrecv = Server.idCounter++;
-              client.PID = Server.pidCounter++ // Change this to get the client username and PID from the database
+              client.PID = Server.pidCounter++; // Change this to get the client username and PID from the database
               Server.clients.Add(client);
             }
             QPacket reply = new QPacket();
