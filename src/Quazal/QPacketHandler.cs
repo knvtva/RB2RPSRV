@@ -1,5 +1,6 @@
 using System;
-
+using System.Net.Sockets;
+using System.Net;
 
 namespace Quazal
 {
