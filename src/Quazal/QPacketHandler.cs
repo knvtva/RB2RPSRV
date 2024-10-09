@@ -83,7 +83,7 @@ namespace Quazal
             return reply;
           }
 
-          public static QPacket ProcessPING(ClientInfo client, QPacket p)
+          public static QPacket ProcessPING(Client client, QPacket p)
           {
             QPacket reply = new QPacket();
             reply.m_oSourceVPort = p.m_oDestinationVPort;
