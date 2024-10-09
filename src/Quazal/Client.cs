@@ -20,7 +20,10 @@ namespace Quazal
         public uint IDrecv;
         public uint IDsend;
         public IPEndPoint ep;
-        public UdpClient udp;      
+        public UdpClient udp;
+
+        public uint sPID; // Server PID
+        public uint sPort; // Server Port      
     }
 
 }
