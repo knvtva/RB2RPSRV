@@ -19,5 +19,21 @@ namespace Quazal
                     break;
             }
         }
+
+        public static void HandleAuthenticationServiceRequest(QPacket p, RMCP rmc, Client client)
+        {
+            RMCPResponse reply;
+            switch (rmc.methodID)
+            {
+                case 1:
+                    Logger.Error("[RMC Authentication] Login Request Received but not implemented");
+                case 3:
+                    reply = new RMCPacketResponseRequestTicket(client.PID, client.sPID);
+                    RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
+                    break;
+                default:
+                    Logger.Error("[RMC Authentication] Unknown Method ID" + rmc.methodID);
+            }
+        }
     }
 }
