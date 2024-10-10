@@ -82,6 +82,26 @@ namespace Quazal
             return result;
         }
 
+        public static string Read2ByteString(Stream s)
+        {
+            string result = "";
+            ushort len = ReadUint16(s); // Read length as 2 bytes (ushort)
+            for (int i = 0; i < len - 1; i++)
+                result += (char)s.ReadByte();
+            s.ReadByte(); // Discard the null terminator or padding byte
+            return result;
+        }
+
+        public static string Read4ByteString(Stream s)
+        {
+            string result = "";
+            uint len = ReadUint32(s); // Read length as 4 bytes (uint)
+            for (int i = 0; i < len - 1; i++)
+                result += (char)s.ReadByte();
+            s.ReadByte(); // Discard the null terminator or padding byte
+            return result;
+        }
+
         public static void WriteUint8(Stream s, byte v)
         {
             s.WriteByte(v);
