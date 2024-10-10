@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Quazal
 {
-    public class RMCPacketResponseRequestTicket
+    public class RMCPacketResponseRequestTicket : RMCPResponse
     {
         public uint resultCode = 0x10001;
         public byte[] ticketBuffer;
