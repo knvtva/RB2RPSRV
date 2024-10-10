@@ -27,6 +27,7 @@ namespace Quazal
             {
                 case 1:
                     reply = new RMCPacketResponseLogin(client.PID, client.sPID, client.sPort);
+                    RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 3:
                     reply = new RMCPacketResponseRequestTicket(client.PID, client.sPID);
