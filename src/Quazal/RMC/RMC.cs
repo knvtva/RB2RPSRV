@@ -59,6 +59,10 @@ namespace Quazal
             switch (rmc.proto)
             {
                 case RMCP.PROTOCOL.AuthenticationService:
+                    AuthenticationService.HandleAuthenticationServiceRequest(p, rmc, client);
+                    break;
+                default:
+                    Logger.Warning("RMCP not implemented " + rmc.proto);
                     break;
             }
         }
@@ -73,7 +77,7 @@ namespace Quazal
             switch (rmc.proto)
             {
                 case RMCP.PROTOCOL.AuthenticationService:
-                    // Implement This method
+                    AuthenticationService.ProcessAuthenticationServiceRequest(m, rmc);
                     break;
             }
         }

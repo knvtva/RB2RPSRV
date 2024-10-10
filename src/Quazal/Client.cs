@@ -26,7 +26,7 @@ namespace Quazal
         public UdpClient udp;
 
         public uint sPID; // Server PID
-        public uint sPort; // Server Port      
+        public ushort sPort; // Server Port      
     }
 
 }
