@@ -160,6 +160,23 @@ namespace Quazal
             return result.ToArray();
         }
 
+        public static void WriteString(Stream s, string v)
+        {
+            if (v != null)
+            {
+                WriteUint16(s, (ushort)(v.Length + 1));
+                foreach (char c in v)
+                    s.WriteByte((byte)c);
+                s.WriteByte(0);
+            }
+            else
+            {
+                s.WriteByte(1);
+                s.WriteByte(0);
+                s.WriteByte(0);
+            }
+        }
+
         public static byte[] Compress(byte[] data)
         {
             ZlibStream s = new ZlibStream(new MemoryStream(data), Ionic.Zlib.CompressionMode.Compress);
