@@ -8,7 +8,6 @@ namespace Quazal
 {
     public abstract class RMCPResponse
     {
-        public abstract override string ToString();
         public abstract byte[] ToBuffer();
     }
 }
