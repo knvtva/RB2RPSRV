@@ -8,9 +8,9 @@ namespace Quazal
         {
             switch(rmc.methodID)
             {
-                //case 1:
-                    //rmc.request = new RMCPacketRequestLogin(s);
-                    //break;
+                case 1:
+                    rmc.request = new RMCPacketRequestLogin(s);
+                    break;
                 case 3:
                     rmc.request = new RMCPacketRequestRequestTicket(s);
                     break;
@@ -26,7 +26,7 @@ namespace Quazal
             switch (rmc.methodID)
             {
                 case 1:
-                    Logger.Error("[RMC Authentication] Login Request Received but not implemented");
+                    reply = new RMCPacketResponseLogin(client.PID, client.sPID, client.sPort);
                     break;
                 case 3:
                     reply = new RMCPacketResponseRequestTicket(client.PID, client.sPID);
