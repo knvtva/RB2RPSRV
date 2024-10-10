@@ -8,11 +8,11 @@ namespace Quazal
         {
             switch(rmc.methodID)
             {
-                case 1:
-                    rmc.request = new RMCPacketRequestLogin(s);
-                    break;
+                //case 1:
+                    //rmc.request = new RMCPacketRequestLogin(s);
+                    //break;
                 case 3:
-                    rmc.request = new RMCPacketRequestTicket(s);
+                    rmc.request = new RMCPacketRequestRequestTicket(s);
                     break;
                 default:
                     Logger.Error("[RMC Authentication] Unknown Method ID" + rmc.methodID);
@@ -27,12 +27,14 @@ namespace Quazal
             {
                 case 1:
                     Logger.Error("[RMC Authentication] Login Request Received but not implemented");
+                    break;
                 case 3:
                     reply = new RMCPacketResponseRequestTicket(client.PID, client.sPID);
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:
                     Logger.Error("[RMC Authentication] Unknown Method ID" + rmc.methodID);
+                    break;
             }
         }
     }
