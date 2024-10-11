@@ -162,13 +162,17 @@ namespace Quazal
                               reply = QPacketHandler.ProcessCONNECT(client, p);
                           }
                     break;
+                case QPacket.PACKETTYPE.DATA:
+                    if (p.m_oSourceVPort.type == QPacket.STREAMTYPE.OldRVSec)
+                          RMC.HandlePacket(listener, p);
+                    break;
                 case QPacket.PACKETTYPE.DISCONNECT:
                     if (client != null)
-                        reply = QPacketHandler.ProcessDISCONNECT(client, p);
+                        reply = ProcessDISCONNECT(client, p);
                         break;
                 case QPacket.PACKETTYPE.PING:
                     if (client != null)
-                        reply = QPacketHandler.ProcessPING(client, p);
+                        reply = ProcessPING(client, p);
                         break;
                 case QPacket.PACKETTYPE.NATPING:
                   ulong time = BitConverter.ToUInt64(p.payload, 5);
