@@ -188,7 +188,7 @@ namespace Quazal
             byte[] result = new byte[buff.Length + 1];
             for (int i = 0; i < buff.Length; i++)
                 result[i] = buff[i];
-            result[buff.Length] = checkSum = MakeChecksum(buff);
+            result[buff.Length] = checkSum = MakeChecksum(buff, Client.signatureBase);
             return result;
         }
 
@@ -205,34 +205,52 @@ namespace Quazal
             }
         }
 
-        public static byte MakeChecksum(byte[] data, byte setting = 0xFF)
+        public static byte MakeChecksum(byte[] data, int signatureBase)
         {
-            byte result = 0;
-            if (setting == 0xFF)
-                setting = GetProtocolSetting((byte)(data[0] >> 4));
-            uint tmp = 0;
-            for (int i = 0; i < data.Length / 4; i++)
-                tmp += BitConverter.ToUInt32(data, i * 4);
-            uint leftOver = (uint)data.Length & 3;
-            uint processed = 0;
-            byte tmp2 = 0, tmp3 = 0, tmp4 = 0;
-            uint pos = (uint)data.Length - leftOver;
-            if (leftOver >= 2)
+            int steps = data.Length / 4;
+            uint temp = 0;
+
+            for (int i = 0; i < steps; i++)
             {
-                processed = 2;
-                tmp2 = data[pos];
-                tmp3 = data[pos + 1];
-                pos += 2;
+                int offset = i * 4;
+                temp += BitConverter.ToUInt32(data, offset);
             }
-            if (processed >= leftOver)
-                tmp4 = setting;
-            else
-                tmp4 = (byte)(setting + data[pos]);
-            result = (byte)((byte)(tmp >> 24) +
-                     (byte)(tmp >> 16) +
-                     (byte)(tmp >> 8) +
-                     (byte)tmp + tmp2 + tmp3 + tmp4);
-            return result;
+
+            temp &= 0xFFFFFFFF;
+
+            byte[] tempBytes = BitConverter.GetBytes(temp);
+
+            int checksum = signatureBase;
+
+            checksum += SumRemainingBytes(data);
+
+            checksum += SumBytes(tempBytes);
+
+            return (byte)(checksum & 0xFF);
+        }
+
+        private static int SumRemainingBytes(byte[] data)
+        {
+            int sum = 0;
+            int leftoverStart = data.Length & ~3;
+
+            for (int i = leftoverStart; i < data.Length; i++)
+            {
+                sum += data[i];
+            }
+
+            return sum;
+        }
+
+        private static int SumBytes(byte[] bytes)
+        {
+            int sum = 0;
+            foreach (byte b in bytes)
+            {
+                sum += b;
+            }
+
+            return sum;
         }
 
         private void ExtractFlags()

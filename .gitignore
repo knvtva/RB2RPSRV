@@ -26,3 +26,9 @@ go.work.sum
 /src/Quazal/obj
 /src/Quazal/bin
 /src/Quazal/obj
+/src/RB2RPSRV/obj
+/src/RB2RPSRV/obj
+/src/RB2RPSRV/.vs
+/src/RB2RPSRV/bin
+/src/RB2RPSRV/obj
+/src/RB2RPSRV/obj/Debug

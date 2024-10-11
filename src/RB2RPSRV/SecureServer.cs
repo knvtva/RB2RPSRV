@@ -10,7 +10,7 @@ namespace RB2RPSRV
         public static readonly object _sync = new object();
         public static bool _exit = false;
         private static UdpClient listener;
-        private static ushort listenPort = 30641;
+        private static ushort listenPort = 30846;
 
 
 
@@ -34,10 +34,10 @@ namespace RB2RPSRV
 
         public static void kMainThread(object obj)
         {
-            Console.WriteLine("[RB2RPSRV] Secure Server Started on " + IPAddress.Any + ":" + listenPort);
+            Logger.Info("Secure Server started on " + IPAddress.Any + ":" + listenPort);
             listener = new UdpClient(listenPort);
             IPEndPoint ep = new IPEndPoint(IPAddress.Any, 0);
-            while (true) 
+            while (true)
             {
                 lock (_sync)
                 {
@@ -48,17 +48,15 @@ namespace RB2RPSRV
                 {
                     byte[] bytes = listener.Receive(ref ep);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
-                } 
+                    Logger.Error(e.Message);
+                }
             }
-            Console.WriteLine("[RB2RPSRV] Auth Server Stopped");
         }
 
         public static void ProcessPacket(byte[] data, IPEndPoint ep)
         {
-            Console.WriteLine("[RB2RPSRV] <> Not Implemented...");
         }
     }
 }

@@ -11,7 +11,7 @@ namespace RB2RPSRV
         public static readonly object _sync = new object();
         public static bool _exit = false;
         private static UdpClient listener;
-        private static ushort listenPort = 30640;
+        private static ushort listenPort = 30845;
 
 
 
@@ -35,10 +35,10 @@ namespace RB2RPSRV
 
         public static void kMainThread(object obj)
         {
-            Console.WriteLine("[RB2RPSRV] Auth Server Started on " + IPAddress.Any + ":" + listenPort);
+            Logger.Info("Auth Server started on " + IPAddress.Loopback + ":" + listenPort);
             listener = new UdpClient(listenPort);
-            IPEndPoint ep = new IPEndPoint(IPAddress.Any, 0);
-            while (true) 
+            IPEndPoint ep = new IPEndPoint(IPAddress.Loopback, 0);
+            while (true)
             {
                 lock (_sync)
                 {
@@ -48,37 +48,19 @@ namespace RB2RPSRV
                 try
                 {
                     byte[] bytes = listener.Receive(ref ep);
+                    ProcessPacket(bytes, ep);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
-                } 
+                    Logger.Error(e.Message);
+                }
             }
-            Console.WriteLine("[RB2RPSRV] Secure Server Stopped");
         }
 
         public static void ProcessPacket(byte[] data, IPEndPoint ep)
         {
-            QPacket p = new QPacket(data);
-
-            switch(p.type)
-            {
-                case QPacket.PACKETTYPE.SYN:
-                    // Implement SYN
-                    break;
-                case QPacket.PACKETTYPE.CONNECT:
-                    // Implement CONNECT
-                    break;
-                case QPacket.PACKETTYPE.DATA:
-                    // Implement DATA
-                    break;
-                case QPacket.PACKETTYPE.DISCONNECT:
-                    // Implement DISCONNECT
-                    break;
-                case QPacket.PACKETTYPE.PING:
-                    // Implement PING
-                    break;
-            }
+            Logger.Debug("Recieved a packet sending to the Quazal Packet Handler");
+            QPacketHandler.ProcessPacket("Auth", data, ep, listener, 0x2, listenPort);
         }
     }
 }
