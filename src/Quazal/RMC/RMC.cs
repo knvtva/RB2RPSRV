@@ -18,7 +18,7 @@ namespace Quazal
             client.udp = udp;
             if (p.flags.Contains(QPacket.PACKETFLAG.FLAG_ACK))
                 return;
-            RMCP rmc = new RMCP();
+            RMCP rmc = new RMCP(p);
             if (rmc.isRequest)
                 HandleRequest(client, p, rmc);
             else
